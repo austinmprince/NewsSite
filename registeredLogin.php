@@ -1,6 +1,7 @@
 <?php
   require 'database.php';
   if (isset($_POST['userName']) && isset($_POST['password'])) {
+    // Much of the following code is taken from the course wiki and modified slightly
     $stmt = $mysqli->prepare("SELECT COUNT(*), username, password, user_id FROM users WHERE username=?");
     if(!$stmt){
   	  printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -20,8 +21,8 @@
 	      $_SESSION['username'] = $username;
         $_SESSION['token'] = substr(md5(rand()), 0, 10);
         $_SESSION['user_id'] = $user_id;
-        header("refresh: 3; url=registerDisplay.php");
-        echo "In the site";
+        header("refresh: 1; url=viewFiles.php");
+        echo "Login succesful";
         exit;
 
     }

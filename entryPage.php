@@ -9,12 +9,12 @@
     <form action="registeredLogin.php" method="post" autocomplete="off">
 		Enter username: <input type="text" name="userName"/>
     Enter password: <input type="password" name="password"/>
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>/">
     <input type="submit" name="login">
 	</form>
   <h3>If you are an unregistered user click below to see new stories</h3>
-  <form action="viewFiles.php">
+  <form action="viewFiles.php" method="post">
   <input type="submit" name="Submit">
+  <input type="hidden" name="guest" value="guest">
   </form>
 	<h3>Create a new user</h3>
 		<form action="addUser.php" method="post">
