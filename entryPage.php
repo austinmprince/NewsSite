@@ -4,7 +4,7 @@
     <title>Login page</title>
   </head>
   <body>
-    <h1>Welcome to Generic News Site Generator version2.1.4.3.x</h1>
+    <h1>Welcome to Generic News Site Generator version 2.1.4.3.x</h1>
     <h3>If you are a registered user please login below</h3>
     <form action="registeredLogin.php" method="post" autocomplete="off">
 		Enter username: <input type="text" name="userName"/>
