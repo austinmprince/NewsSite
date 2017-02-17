@@ -19,13 +19,13 @@
   echo "<ul>\n";
   while($row = $result->fetch_assoc()){
   	printf("<a href='%s'> %s </a><br>", $row["story_link"], $row["title"]);
-    printf("%s", $row["description"]);
+    printf("%s<br>", $row["description"]);
   }
-  echo $_SESSION['username'];
+  //echo $_SESSION['username'];
 
   if (isset($_SESSION['username']) && $_SESSION['username'] != "guest") {
     printf("<form action='storyManage.php' method='post'>");
-    printf("<input type='submit' value='Add story' name='Submit'><br></form>");
+    printf("<input type='submit' value='Manage stories' name='Submit'><br></form>");
     printf("<form action='logout.php' method='post'>");
     printf("<input type='submit' value='Logout' name='Submit'></form>");
 
