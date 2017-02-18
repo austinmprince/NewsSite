@@ -6,7 +6,7 @@
   <body>
     <p>Would you like to delete any of your stories </p>
     <form action='deleteStory.php' method='post'>
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
+    <input type="hidden" name="token" value="<?php session_start(); echo $_SESSION['token'];?>" />
     <?php
       require 'database.php';
       session_start();

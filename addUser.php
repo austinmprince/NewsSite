@@ -36,8 +36,8 @@
     $stmt->bind_param('ss', $userName, $addPassword);
     $stmt->execute();
     $stmt->close();
-    //header("Location: entryPage.php");
-    //exit;
+    header("Location: entryPage.php");
+    exit;
 
     }
   }
