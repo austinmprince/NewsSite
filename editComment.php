@@ -13,10 +13,10 @@
 		   	die("Request forgery detected");
 	  	}
 	  	$comment_id = $_POST['comment_id'];
-	  	$stmt=$mysqli->prepare('select comment from comments where comment_id=?');
+	  	$stmt=$mysqli->prepare('select comment, story_id from comments where comment_id=?');
 	  	$stmt->bind_param('i',$comment_id);
 	  	$stmt->execute();
-	  	$stmt->bind_result($comment);
+	  	$stmt->bind_result($comment, $story_id);
 	  	$stmt->fetch();
 	  	$stmt->close();
 	 ?>
@@ -25,6 +25,7 @@
     <input type='Submit' name='submit' value='Post Comment'>
     <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
     <input type="hidden" name="comment_id" value="<?php echo $comment_id;?>"/>
+    <input type="hidden" name="story_id" value="<?php echo $story_id;?>"/>
   </form>
 
 </body>
