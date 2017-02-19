@@ -9,7 +9,7 @@
     <input type="hidden" name="token" value="<?php session_start(); echo $_SESSION['token'];?>" />
     <?php
       require 'database.php';
-      session_start();
+      // session_start();
       $user_id = $_SESSION['user_id'];
       $stmt = $mysqli->prepare("select story_link, title, description, story_id from
       stories where stories.user_id=$user_id");

@@ -37,6 +37,9 @@ $result = $stmt ->get_result();
 while($row = $result->fetch_assoc()){
 	$return[] = $row;
 	printf('<p>%s:<br>%s</p>', $row['username'], $row['comment']);
+	//add something that makes it only possible for user who posted it
+	printf("<form action='deleteComment.php' method='post'><input type='Submit' name='submit' value='Delete Comment'></form>");
+	// printf(<input type='Submit' name='submit' value='Delete Comment'></form>);
 }
  ?>
 

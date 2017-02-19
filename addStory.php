@@ -11,7 +11,9 @@
     $storyLink = $_POST['storyLink'];
     $storyTitle = $_POST['storyTitle'];
     $storyDescription = $_POST['storyDescription'];
+    
     $stmt = $mysqli->prepare("insert into stories (user_id, story_link, title, description) values (?, ?, ?, ?)");
+    
     if(!$stmt){
       printf("Query Prep Failed: %s\n", $mysqli->error);
       exit;
@@ -22,5 +24,5 @@
   }
   header("Location: storyManage.php");
   exit;
-  
+
  ?>
