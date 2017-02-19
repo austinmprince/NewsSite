@@ -4,10 +4,16 @@
   if(!hash_equals($_SESSION['token'], $_POST['token'])){
 	   die("Request forgery detected");
   }
-  $file_name = $_POST['value'];
-  echo $file_name;
-  // $stmt->prepare("delete from stories where story_id=value");
-  // $stmt->execute();
-  // $stmt->close();
+  //$file_name = $_POST['name'];
+  $stmt = $mysqli->prepare("delete from stories where story_id=$file_name");
+  if(!$stmt){
+    printf("Query Prep Failed: %s\n", $mysqli->error);
+    exit;
+  }
+  $stmt->execute();
+  $stmt->close();
+  header("Location: viewStories.php");
+  echo "Story deleted succesfully";
+  exit;
 
   ?>

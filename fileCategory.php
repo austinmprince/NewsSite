@@ -1,29 +1,9 @@
 <?php
-  session_start();
   require 'database.php';
-  if (isset($_POST['guest'])){
-    if (!isset($_SESSION['username'])){
-      $_SESSION['username'] = "guest";
-    }
-  }
-  $cat =$mysqli->prepare("select category from stories order by category");
-  if(!$cat){
-  	printf("Query Prep Failed: %s\n", $mysqli->error);
-  	exit;
-  }
-  $cat->execute();
-
-  $result = $cat->get_result();
-
-  echo "<ul>\n";
-  while($catrow = $result->fetch_assoc()){
-  	printf("<a href='%s?id=%s'> %s </a><br>", 'fileCategory.php',$catrow["category"], $catrow["category"]);
-
-  }
-  $cat->close();
-
-  // Code taken from course wiki
-  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories order by story_id");
+  session_start();
+  $category = $_GET['id'];
+  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories where category='$category'
+   order by story_id");
   if(!$stmt){
   	printf("Query Prep Failed: %s\n", $mysqli->error);
   	exit;
@@ -38,6 +18,8 @@
     printf("%s<br>", $row["description"]);
 
   }
+  printf("<form action='viewStories.php' method='post'>");
+  printf("<input type='Submit' value='Return to Main' name='Submit'><br>");
 
   if (isset($_SESSION['username']) && $_SESSION['username'] != "guest") {
     printf("<form action='storyManage.php' method='post'>");
@@ -48,4 +30,3 @@
   }
 
 $stmt->close();
-?>

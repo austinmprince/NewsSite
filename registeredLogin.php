@@ -21,7 +21,7 @@
 	      $_SESSION['username'] = $username;
         $_SESSION['token'] = substr(md5(rand()), 0, 10);
         $_SESSION['user_id'] = $user_id;
-        header("refresh: 1; url=viewFiles.php");
+        header("refresh: 1; url=viewStories.php");
         echo "Login succesful";
         exit;
 
@@ -29,7 +29,7 @@
     else{
 
 
-       header("refresh: 5; url=entryPage.php");
+       header("refresh: 5; url=entryPage.html");
        echo "Login failed";
        exit;
     }
@@ -37,7 +37,7 @@
 
   }
   else {
-  	header("refresh: 5; url=entryPage.php");
+  	header("refresh: 5; url=entryPage.html");
     echo "Username or password is not set";
     exit;
   }
