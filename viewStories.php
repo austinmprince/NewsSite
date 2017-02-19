@@ -6,7 +6,7 @@
       $_SESSION['username'] = "guest";
     }
   }
-  $cat =$mysqli->prepare("select category from stories order by category");
+  $cat =$mysqli->prepare("select distinct category from stories order by category");
   if(!$cat){
   	printf("Query Prep Failed: %s\n", $mysqli->error);
   	exit;
@@ -14,8 +14,7 @@
   $cat->execute();
 
   $result = $cat->get_result();
-
-  echo "<ul>\n";
+  printf("<h3>News categories</h3><br>");
   while($catrow = $result->fetch_assoc()){
   	printf("<a href='%s?id=%s'> %s </a><br>", 'fileCategory.php',$catrow["category"], $catrow["category"]);
 
@@ -31,8 +30,7 @@
   $stmt->execute();
 
   $result = $stmt->get_result();
-
-  echo "<ul>\n";
+  printf("<h3>News stories</h3><br>");
   while($row = $result->fetch_assoc()){
   	printf("<a href='%s'> %s </a><br>", $row["story_link"], $row["title"]);
     printf("%s<br>", $row["description"]);
@@ -44,6 +42,13 @@
     printf("<input type='submit' value='Manage stories' name='Submit'><br></form>");
     printf("<form action='logout.php' method='post'>");
     printf("<input type='submit' value='Logout' name='Submit'></form>");
+
+  }
+  else {
+    printf("<form action='addUser.php' method='post'>");
+    printf("<br><input type='submit' value='Create Registered User' name='Submit'><br></form>");
+    printf("<form action='entryPage.html'>");
+    printf("<input type='submit' value='Back to Login Screen' name='Submit'><br></form>");
 
   }
 

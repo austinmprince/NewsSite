@@ -10,6 +10,8 @@
     Enter password: <input type="password" name="password">
     <input type="submit" name="login">
   </form>
+  <form action='entryPage.html'>
+  <br><input type='submit' value='Back to Login Screen' name='Submit'></form>
 </body>
 </html>
 <?php

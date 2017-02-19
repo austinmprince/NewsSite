@@ -39,7 +39,8 @@
     Link: <input type='text' style='width:400px' name='storyLink'><br>
     Enter a short story description: <br/>
     <textarea name='storyDescription' style='height:200px;width:300px'></textarea><br>
-      <select id="mySelect">
+   Select story from existing category <br>
+      <select name="category">
         <?php
         require 'database.php';
         echo "In php doc";
@@ -48,7 +49,6 @@
           printf("Query Prep Failed: %s\n", $mysqli->error);
           exit;
         }
-        echo "In sedal;dfsjkl;lecgt";
         $cat->execute();
         $resultcat = $cat->get_result();
         while($catrow = $resultcat->fetch_assoc()){
@@ -57,21 +57,9 @@
         }
         $cat->close();
         ?>
+        <option value="Add new category" name='category'>Add new category</option>
       </select></br>
-      <p>Click the button to add a new category</p>
-      <button type="button" onclick="myFunction()">Insert option</button>
-      <input type="text" name="addOption">
-      <script>
-      function myFunction() {
-          var x = document.getElementById("mySelect");
-          var option = document.createElement("option");
-          <?php
-          $_GET['addOption'];
-          ?>
-          option.text = "addOption";
-          x.add(option);
-      }
-      </script>
+      Or enter new category <input type="text" name="addOption">
     </select><br>
     <input type='Submit' name='submit' value='Add story'>
     <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
