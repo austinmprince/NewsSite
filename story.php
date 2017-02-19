@@ -11,6 +11,7 @@
 </html>
 
 <?php 
+session_start();
 $story_id = $_GET['id'];
 require 'database.php';
 $stmt = $mysqli->prepare("select title, description from stories where story_id=$story_id");
@@ -27,7 +28,7 @@ while($row = $result->fetch_assoc()){
 }
 
 printf('<h4>Comments</h4>');
-$stmt = $mysqli->prepare("select comments.comment, users.username from comments join users on (comments.user_id=users.user_id) where story_id=$story_id");
+$stmt = $mysqli->prepare("select comments.comment, users.username, comments.comment_id from comments join users on (comments.user_id=users.user_id) where story_id=$story_id");
 if(!$stmt){
 	printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;
@@ -38,8 +39,14 @@ while($row = $result->fetch_assoc()){
 	$return[] = $row;
 	printf('<p>%s:<br>%s</p>', $row['username'], $row['comment']);
 	//add something that makes it only possible for user who posted it
-	printf("<form action='deleteComment.php' method='post'><input type='Submit' name='submit' value='Delete Comment'></form>");
-	// printf(<input type='Submit' name='submit' value='Delete Comment'></form>);
+	printf("
+		<form action='deleteComment.php' method='post'>
+		<input type='Submit' name='submit' value='Delete Comment'>
+		<input type='hidden' name='comment_id' value='%s'>
+		<input type='hidden' name='token' value='%s'>
+		<input type='hidden' name='story_id' value='%s'>
+		</form>
+		", $row['comment_id'], $_SESSION['token'], $story_id);
 }
  ?>
 
