@@ -18,7 +18,7 @@
 
   echo "<ul>\n";
   while($row = $result->fetch_assoc()){
-  	printf("<a href=http://ec2-35-166-50-140.us-west-2.compute.amazonaws.com/~zelataino/module_2/story.php?id=%s> %s </a><br>", $row['story_id'], $row["title"]);
+  	printf("<a href=story.php?id=%s> %s </a><br>", $row['story_id'], $row["title"]);
     printf("%s<br>", $row["description"]);
   }
   //echo $_SESSION['username'];

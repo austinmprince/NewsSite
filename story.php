@@ -36,7 +36,6 @@ if(!$stmt){
 $stmt->execute();
 $result = $stmt ->get_result();
 while($row = $result->fetch_assoc()){
-	$return[] = $row;
 	printf('<p>%s:<br>%s</p>', $row['username'], $row['comment']);
 	//add something that makes it only possible for user who posted it
 	printf("
@@ -47,6 +46,13 @@ while($row = $result->fetch_assoc()){
 		<input type='hidden' name='story_id' value='%s'>
 		</form>
 		", $row['comment_id'], $_SESSION['token'], $story_id);
+	printf("
+		<form action='editComment.php' method='post'>
+		<input type='Submit' name='submit' value='Edit Comment'>
+		<input type='hidden' name='comment_id' value='%s'>
+		<input type='hidden' name='token' value='%s'>
+		</form>
+		", $row['comment_id'], $_SESSION['token']);
 }
  ?>
 
