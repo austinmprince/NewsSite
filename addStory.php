@@ -22,6 +22,5 @@
   }
   header("Location: storyManage.php");
   exit;
-
-
+  
  ?>

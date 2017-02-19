@@ -21,7 +21,7 @@
 	      $_SESSION['username'] = $username;
         $_SESSION['token'] = substr(md5(rand()), 0, 10);
         $_SESSION['user_id'] = $user_id;
-        header("refresh: 1; url=viewFiles.php");
+        header("refresh: 1; url=viewStories.php");
         echo "Login succesful";
         exit;
 
