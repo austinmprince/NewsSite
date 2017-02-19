@@ -14,11 +14,12 @@
       }
       $user_id = $_SESSION['user_id'];
       $stmt = $mysqli->prepare("select story_link, title, description, story_id from
-      stories where stories.user_id=$user_id");
+      stories where stories.user_id=?");
       if(!$stmt){
       	printf("Query Prep Failed: %s\n", $mysqli->error);
       	exit;
       }
+      $stmt->bind_param('i', $user_id);
       $stmt->execute();
 
       $result = $stmt->get_result();
@@ -42,11 +43,12 @@
     }
     $user_id = $_SESSION['user_id'];
     $stmt = $mysqli->prepare("select story_link, title, description, story_id from
-    stories where stories.user_id=$user_id");
+    stories where stories.user_id=?");
     if(!$stmt){
       printf("Query Prep Failed: %s\n", $mysqli->error);
       exit;
     }
+    $stmt->bind_param('i', $user_id);
     $stmt->execute();
 
     $result = $stmt->get_result();

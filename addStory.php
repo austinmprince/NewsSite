@@ -25,7 +25,7 @@
     else {
       $category = $_POST['category'];
       echo "existing category";
-      echo $category;
+      //echo $category;
     }
     $stmt = $mysqli->prepare("insert into stories (user_id, story_link, title, description, category) values (?, ?, ?, ?, ?)");
     if(!$stmt){

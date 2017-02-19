@@ -36,7 +36,6 @@
         <select name="category">
           <?php
           require 'database.php';
-          echo "In php doc";
           $cat =$mysqli->prepare("select distinct category from stories order by category");
           if(!$cat){
             printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -60,6 +59,7 @@
         Or enter new category <input type="text" name="addOption">
       </select><br>
       <input type='Submit' name='submit' value='Submit Edits'>
+      <input type="hidden" name="stid" value=<?php echo $stid_number;?> />
       <input type="hidden" name="token" value="<?php echo $_SESSION['token'];?>" />
     </form><br>
     <form action='viewStories.php'>

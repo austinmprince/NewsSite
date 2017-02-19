@@ -27,7 +27,8 @@
   	  exit;
     }
 
-    $checkUserID = $mysqli->prepare("SELECT username from users WHERE username='$userName'");
+    $checkUserID = $mysqli->prepare("SELECT username from users WHERE username=?");
+    $checkUserID->bind_param('s', $userName);
     $checkUserID->execute();
     $checkUserIDResult=$checkUserID->fetch();
     //echo $checkUserID;
