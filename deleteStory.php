@@ -6,8 +6,8 @@
   }
   $file_name = $_POST['value'];
   echo $file_name;
-  // $stmt->prepare("delete from stories where story_id=value");
-  // $stmt->execute();
-  // $stmt->close();
+  $stmt->prepare("delete from stories where story_id=value");
+  $stmt->execute();
+  $stmt->close();
 
   ?>
