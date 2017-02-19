@@ -13,7 +13,7 @@
   $stmt->bind_param('s', $file_name);
   $stmt->execute();
   $stmt->close();
-  header("Location: viewStories.php");
+  header("refesh:1; url=viewStories.php");
   echo "Story deleted succesfully";
   exit;
 
