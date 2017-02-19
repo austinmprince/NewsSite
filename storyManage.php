@@ -25,14 +25,41 @@
       while($row = $result->fetch_assoc()){
       	printf("%s <input type='radio' value=%s name=name>", $row['title'], $row['story_id']);
         printf("<input type='submit' value='Delete'><br>");
-
-
+        printf("<input type='hidden' name='token' value='%s' /> ", $_SESSION['token']);
 
       }
       $stmt->close();
   ?>
 
   </form>
+  <p>Would you like to edit your stories</p>
+  <form action='editStory.php' method='post'>
+  <input type="hidden" name="token" value="<?php session_start(); echo $_SESSION['token'];?>" />
+  <?php
+    require 'database.php';
+    if(!isset($_SESSION)){
+      session_start();
+    }
+    $user_id = $_SESSION['user_id'];
+    $stmt = $mysqli->prepare("select story_link, title, description, story_id from
+    stories where stories.user_id=$user_id");
+    if(!$stmt){
+      printf("Query Prep Failed: %s\n", $mysqli->error);
+      exit;
+    }
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    while($row = $result->fetch_assoc()){
+      printf("%s <input type='radio' value=%s name=name>", $row['title'], $row['story_id']);
+      printf("<input type='submit' value='Edit'><br>");
+      printf("<input type='hidden' name='token' value='%s' />", $_SESSION['token']);
+
+    }
+    $stmt->close();
+?>
+
+</form>
   <p>Would you like to add any stories </p>
   <form action='addStory.php' method='post'>
     Title: <input type='text' style='width:400px' name='storyTitle'><br>
@@ -41,9 +68,9 @@
     <textarea name='storyDescription' style='height:200px;width:300px'></textarea><br>
    Select story from existing category <br>
       <select name="category">
+        <option value="Add new category" name='category'>Add new category</option>
         <?php
         require 'database.php';
-        echo "In php doc";
         $cat =$mysqli->prepare("select category from stories order by category");
         if(!$cat){
           printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -57,7 +84,7 @@
         }
         $cat->close();
         ?>
-        <option value="Add new category" name='category'>Add new category</option>
+
       </select></br>
       Or enter new category <input type="text" name="addOption">
     </select><br>
