@@ -10,6 +10,8 @@
     Enter password: <input type="password" name="password">
     <input type="submit" name="login">
   </form>
+  <form action='entryPage.html'>
+  <br><input type='submit' value='Back to Login Screen' name='Submit'></form>
 </body>
 </html>
 <?php
@@ -25,7 +27,8 @@
   	  exit;
     }
 
-    $checkUserID = $mysqli->prepare("SELECT username from users WHERE username='$userName'");
+    $checkUserID = $mysqli->prepare("SELECT username from users WHERE username=?");
+    $checkUserID->bind_param('s', $userName);
     $checkUserID->execute();
     $checkUserIDResult=$checkUserID->fetch();
     //echo $checkUserID;
