@@ -8,8 +8,8 @@
   }
 
   // get info passed from form
-  $comment_id = $_POST['comment_id'];
-  $story_id = $_POST['story_id'];
+  $comment_id = (int) $_POST['comment_id'];
+  $story_id = (int) $_POST['story_id'];
 
   // delete comment with specificed comment id
   $stmt= $mysqli->prepare("delete from comments where comment_id=?");

@@ -70,7 +70,7 @@
         <option value="Add new category" name='category'>Add new category</option>
         <?php
         require 'database.php';
-        $cat =$mysqli->prepare("select category from stories order by category");
+        $cat =$mysqli->prepare("select distinct category from stories order by category");
         if(!$cat){
           printf("Query Prep Failed: %s\n", $mysqli->error);
           exit;
