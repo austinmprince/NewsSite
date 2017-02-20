@@ -23,8 +23,7 @@ $result = $stmt ->get_result();
 
 // set title, description and link
 while($row = $result->fetch_assoc()){
-	printf('<h1>%s</h1>', $row['title']);
-	printf("<a href=%s>Link</a>", $row['story_link']);
+	printf('<h1><a href=%s>%s</a></h1>', $row['story_link'], $row['title']);
 	printf('<p>%s</p>', $row['description']);
 
 }
