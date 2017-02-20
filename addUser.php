@@ -19,6 +19,7 @@
   if (isset($_POST['userName']) && isset($_POST['password'])){
     $userName = (String)$_POST['userName'];
     $password = (String)$_POST['password'];
+    // Hash the password
     $addPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $mysqli->prepare("insert into users (username, password) values (?, ?)");

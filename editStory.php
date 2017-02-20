@@ -21,14 +21,14 @@
       printf("Query Prep Failed: %s\n", $mysqli->error);
       exit;
     }
-    // Bind parameters of the story that already exists so that we can prefill the
+    // Bind parameters of the story that already exists so that we can prefill the text fields
     $stmt->bind_param('i',  $stid_number);
     $stmt->execute();
     $stmt->bind_result($story_link, $title, $description, $story_id, $category);
     $stmt->fetch();
     $stmt->close();
     ?>
-
+    <!-- Prefill the text fields with the values that already exist in the database for the various fields -->
     Title: <input type='text' style='width:400px' name='storyTitle' value='<?php printf(htmlspecialchars($title));?>'><br>
     Link: <input type='text' style='width:400px' name='storyLink' value='<?php printf(htmlspecialchars($story_link));?>'><br>
     Enter a short story description: <br/>
@@ -46,6 +46,7 @@
           $resultcat = $cat->get_result();
           while($catrow = $resultcat->fetch_assoc()){
             if ($catrow['category'] == $category) {
+              // Make the default category that one the story is already assigned
               printf("<option value='%s' name='category' selected='selected'> %s </option>", $catrow['category'], $catrow['category']);
 
             }

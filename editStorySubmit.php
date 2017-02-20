@@ -13,10 +13,10 @@ if (empty($_POST['storyLink']) || empty($_POST['storyDescription']) || empty($_P
 }
 else {
   $user_id = $_SESSION['user_id'];
-  $storyLink = $_POST['storyLink'];
-  $storyTitle = $_POST['storyTitle'];
-  $stid = $_POST['stid'];
-  $storyDescription = $_POST['storyDescription'];
+  $storyLink = (String)$_POST['storyLink'];
+  $storyTitle = (String)$_POST['storyTitle'];
+  $stid = (int)$_POST['stid'];
+  $storyDescription = (String)$_POST['storyDescription'];
   if ($_POST['category'] == "Add new category") {
     $category = $_POST['addOption'];
     echo "Add new category";

@@ -44,7 +44,7 @@
     printf("<input type='submit' value='Logout' name='Submit'></form>");
 
   }
-  // If the user is not set display the option to create a registered user 
+  // If the user is not set display the option to create a registered user
   else {
 
     printf("<form action='addUser.php' method='post'>");
