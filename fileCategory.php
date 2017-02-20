@@ -4,7 +4,7 @@
   $category = (String)$_GET['id'];
   // Select the stories from the database where the category matches that category the user
   // has selected to view
-  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories where category='?'
+  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories where category=?
    order by story_id");
   if(!$stmt){
   	printf("Query Prep Failed: %s\n", $mysqli->error);
