@@ -21,7 +21,7 @@
 	  	}
 
 	  	// get info passed from form
-	  	$comment_id = $_POST['comment_id'];
+	  	$comment_id = (int) $_POST['comment_id'];
 
 	  	// get specified comment from specified story
 	  	$stmt=$mysqli->prepare('select comment, story_id from comments where comment_id=?');

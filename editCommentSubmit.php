@@ -16,9 +16,9 @@ if (empty($_POST['new_comment'])) {
   exit;
 }else{
 	// get edited comment and it's comment_id and story_id
-	$new_comment = $_POST['new_comment'];
-	$comment_id=$_POST['comment_id'];
-	$story_id=$_POST['story_id'];
+	$new_comment = (String) $_POST['new_comment'];
+	$comment_id= (int) $_POST['comment_id'];
+	$story_id= (int) $_POST['story_id'];
 }
 
 // update database at specified comment_id with new comment

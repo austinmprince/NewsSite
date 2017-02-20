@@ -11,8 +11,8 @@
   if(isset($_POST['comment'])){
   	// get info passed from form
     $user_id = $_SESSION['user_id'];
-  	$comment = $_POST['comment'];
-  	$story_id = $_POST['story_id'];
+  	$comment = (String) $_POST['comment'];
+  	$story_id = (int) $_POST['story_id'];
 
     // add comment into DB
   	$stmt = $mysqli->prepare("insert into comments (comment, story_id, user_id) values (?, ?, ?)");
