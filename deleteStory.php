@@ -25,6 +25,5 @@
   $stmt->execute();
   $stmt->close();
   header("refesh:1; url=viewStories.php");
-  echo "Story deleted succesfully";
   exit;
 ?>

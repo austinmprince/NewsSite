@@ -54,5 +54,28 @@
 
   }
 
+  // Allows the user to delete their account
+  $username = $_SESSION['username'];
+
+  // get user id of current user
+  $stmt = $mysqli->prepare("select user_id from users where username=?");
+  if(!$stmt){
+    printf("Query Prep Failed: %s\n", $mysqli->error);
+    exit;
+  }
+  $stmt->bind_param('s', $username);
+  $stmt->execute();
+  $result = $stmt ->get_result();
+  $row = $result->fetch_assoc();
+
+  // create delete button and pass user_id
+  echo "<br>Click below to delete your account";
+  printf("
+    <form action=deleteUser.php method=post>
+      <input type=submit value=Delete Account name=submit<br>
+      <input type='hidden' name='token' value='%s'>
+      <input type='hidden' name='user_id' value='%s'>
+    </form>", $_SESSION['token'], $row['user_id']);
+
 $stmt->close();
 ?>

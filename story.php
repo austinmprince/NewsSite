@@ -30,11 +30,12 @@ while($row = $result->fetch_assoc()){
 
 // get comments for corresponding story id
 printf('<h4>Comments</h4>');
-$stmt = $mysqli->prepare("select comments.comment, users.username, comments.comment_id from comments join users on (comments.user_id=users.user_id) where story_id=$story_id");
+$stmt = $mysqli->prepare("select comments.comment, users.username, comments.comment_id from comments join users on (comments.user_id=users.user_id) where story_id=?");
 if(!$stmt){
 	printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;
 }
+$stmt->bind_param('i', $story_id);
 $stmt->execute();
 $result = $stmt ->get_result();
 
