@@ -32,9 +32,8 @@
   $result = $stmt->get_result();
   printf("<h3>News stories</h3><br>");
   while($row = $result->fetch_assoc()){
-    printf("<a href='story.php?id=%s'> %s </a><br>", $row["story_id"], $row["title"]);
+  	printf("<a href=story.php?id=%s> %s </a><br>", $row['story_id'], $row["title"]);
     printf("%s<br>", $row["description"]);
-
   }
 
   if (isset($_SESSION['username']) && $_SESSION['username'] != "guest") {

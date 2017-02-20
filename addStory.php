@@ -17,6 +17,7 @@
     $storyLink = $_POST['storyLink'];
     $storyTitle = $_POST['storyTitle'];
     $storyDescription = $_POST['storyDescription'];
+
     if ($_POST['category'] == "Add new category") {
       $category = $_POST['addOption'];
       echo "Add new category";
@@ -25,10 +26,8 @@
     else {
       $category = $_POST['category'];
       echo "existing category";
-      //echo $category;
     }
     $stmt = $mysqli->prepare("insert into stories (user_id, story_link, title, description, category) values (?, ?, ?, ?, ?)");
-    
     if(!$stmt){
       printf("Query Prep Failed: %s\n", $mysqli->error);
       exit;
