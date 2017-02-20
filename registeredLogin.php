@@ -29,7 +29,7 @@
     else{
 
 
-       header("refresh: 5; url=entryPage.php");
+       header("refresh: 5; url=entryPage.html");
        echo "Login failed";
        exit;
     }
@@ -37,7 +37,7 @@
 
   }
   else {
-  	header("refresh: 5; url=entryPage.php");
+  	header("refresh: 5; url=entryPage.html");
     echo "Username or password is not set";
     exit;
   }
