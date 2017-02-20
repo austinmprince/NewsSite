@@ -7,24 +7,25 @@
 	<form action="viewStories.php">
   		<input type="submit" value="Back">
   	</form>
-<?php 
+<?php
 session_start();
 $story_id = $_GET['id'];
 require 'database.php';
 
 // get title, description, link from DB to corresponding story id
-$stmt = $mysqli->prepare("select title, description, story_link from stories where story_id=$story_id");
+$stmt = $mysqli->prepare("select title, description, story_link from stories where story_id=?");
 if(!$stmt){
 	printf("Query Prep Failed: %s\n", $mysqli->error);
 	exit;
 }
+$stmt->bind_param('i', $story_id);
 $stmt->execute();
 $result = $stmt ->get_result();
 
 // set title, description and link
 while($row = $result->fetch_assoc()){
-	printf('<h1>%s</h1>', $row['title']);
-	printf("<a href=%s>Link</a>", $row['story_link']);
+	printf('<h1><a href=%s>%s</a></h1>', $row['story_link'], $row['title']);
+	//printf("<a href=%s>Link</a>", $row['story_link']);
 	printf('<p>%s</p>', $row['description']);
 
 }
@@ -42,7 +43,7 @@ $result = $stmt ->get_result();
 // show comments from usernames for this story
 while($row = $result->fetch_assoc()){
 	printf('<p>%s:<br>%s</p>', $row['username'], $row['comment']);
-	
+
 	// makes it only possible for user who posted it to edit and delete
 	if($row['username'] == $_SESSION['username']){
 		printf("

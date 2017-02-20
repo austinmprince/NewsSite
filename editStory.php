@@ -10,17 +10,18 @@
     if(!isset($_SESSION)){
       session_start();
     }
+    // Recieve token from and validate
     if(!hash_equals($_SESSION['token'], $_POST['token'])){
        die("Request forgery detected");
     }
-    //$user_id = $_SESSION['user_id'];
-    $stid_number = $_POST['name'];
+    $stid_number = (int)$_POST['name'];
     $stmt = $mysqli->prepare("select story_link, title, description, story_id, category from
     stories where stories.story_id=?");
     if(!$stmt){
       printf("Query Prep Failed: %s\n", $mysqli->error);
       exit;
     }
+    // Bind parameters of the story that already exists so that we can prefill the
     $stmt->bind_param('i',  $stid_number);
     $stmt->execute();
     $stmt->bind_result($story_link, $title, $description, $story_id, $category);

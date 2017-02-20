@@ -5,7 +5,7 @@
 	   die("Request forgery detected");
   }
 
-  $file_name = $_POST['name'];
+  $file_name = (String)$_POST['name'];
   $stmt = $mysqli->prepare("delete from comments where story_id=?");
   if(!$stmt){
     printf("Query Prep Failed: %s\n", $mysqli->error);

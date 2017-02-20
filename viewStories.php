@@ -14,6 +14,7 @@
   $cat->execute();
 
   $result = $cat->get_result();
+  // Display the different categories
   printf("<h3>News categories</h3><br>");
   while($catrow = $result->fetch_assoc()){
   	printf("<a href='%s?id=%s'> %s </a><br>", 'fileCategory.php',$catrow["category"], $catrow["category"]);
@@ -28,14 +29,14 @@
   	exit;
   }
   $stmt->execute();
-
+  // Displays all the stories individually
   $result = $stmt->get_result();
   printf("<h3>News stories</h3><br>");
   while($row = $result->fetch_assoc()){
   	printf("<a href=story.php?id=%s> %s </a><br>", $row['story_id'], $row["title"]);
     printf("%s<br>", $row["description"]);
   }
-
+  // If the username is set give the user the option to add stories
   if (isset($_SESSION['username']) && $_SESSION['username'] != "guest") {
     printf("<form action='storyManage.php' method='post'>");
     printf("<input type='submit' value='Manage stories' name='Submit'><br></form>");
@@ -43,7 +44,9 @@
     printf("<input type='submit' value='Logout' name='Submit'></form>");
 
   }
+  // If the user is not set display the option to create a registered user 
   else {
+
     printf("<form action='addUser.php' method='post'>");
     printf("<br><input type='submit' value='Create Registered User' name='Submit'><br></form>");
     printf("<form action='entryPage.html'>");

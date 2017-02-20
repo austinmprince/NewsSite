@@ -14,17 +14,15 @@
   }
   else {
     $user_id = $_SESSION['user_id'];
-    $storyLink = $_POST['storyLink'];
-    $storyTitle = $_POST['storyTitle'];
-    $storyDescription = $_POST['storyDescription'];
+    $storyLink = (String)$_POST['storyLink'];
+    $storyTitle = (String)$_POST['storyTitle'];
+    $storyDescription = (String)$_POST['storyDescription'];
 
     if ($_POST['category'] == "Add new category") {
-      $category = $_POST['addOption'];
-      echo "Add new category";
-      echo $category;
+      $category = (String)$_POST['addOption'];
     }
     else {
-      $category = $_POST['category'];
+      $category = (String)$_POST['category'];
       echo "existing category";
     }
     $stmt = $mysqli->prepare("insert into stories (user_id, story_link, title, description, category) values (?, ?, ?, ?, ?)");

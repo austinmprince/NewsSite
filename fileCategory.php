@@ -1,15 +1,17 @@
 <?php
   require 'database.php';
   session_start();
-  $category = $_GET['id'];
-  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories where category='$category'
+  $category = (String)$_GET['id'];
+  // Select the stories from the database where the category matches that category the user
+  // has selected to view
+  $stmt = $mysqli->prepare("select story_link, title, description, story_id from stories where category='?'
    order by story_id");
   if(!$stmt){
   	printf("Query Prep Failed: %s\n", $mysqli->error);
   	exit;
   }
+  $stmt->bind_param('s', $category);
   $stmt->execute();
-
   $result = $stmt->get_result();
 
   echo "<ul>\n";
