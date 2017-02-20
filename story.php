@@ -4,11 +4,15 @@
 	<title>A Story</title>
 </head>
 <body>
-
+	<form action="viewStories.php">
+  		<input type="submit" value="Back">
+  	</form>
 <?php 
 session_start();
 $story_id = $_GET['id'];
 require 'database.php';
+
+// get title, description, link from DB to corresponding story id
 $stmt = $mysqli->prepare("select title, description, story_link from stories where story_id=$story_id");
 if(!$stmt){
 	printf("Query Prep Failed: %s\n", $mysqli->error);
@@ -16,16 +20,16 @@ if(!$stmt){
 }
 $stmt->execute();
 $result = $stmt ->get_result();
-//set title and description and link
+
+// set title, description and link
 while($row = $result->fetch_assoc()){
 	printf('<h1>%s</h1>', $row['title']);
-	if(!empty($row['story_link'])){
-		printf("<a href=%s>Link</a>", $row['story_link']);
-	}
+	printf("<a href=%s>Link</a>", $row['story_link']);
 	printf('<p>%s</p>', $row['description']);
 
 }
-//show comments
+
+// get comments for corresponding story id
 printf('<h4>Comments</h4>');
 $stmt = $mysqli->prepare("select comments.comment, users.username, comments.comment_id from comments join users on (comments.user_id=users.user_id) where story_id=$story_id");
 if(!$stmt){
@@ -34,9 +38,12 @@ if(!$stmt){
 }
 $stmt->execute();
 $result = $stmt ->get_result();
+
+// show comments from usernames for this story
 while($row = $result->fetch_assoc()){
 	printf('<p>%s:<br>%s</p>', $row['username'], $row['comment']);
-	//makes it only possible for user who posted it
+	
+	// makes it only possible for user who posted it to edit and delete
 	if($row['username'] == $_SESSION['username']){
 		printf("
 		<form action='deleteComment.php' method='post'>
@@ -57,6 +64,7 @@ while($row = $result->fetch_assoc()){
 }
  ?>
 
+ <!-- comment box to post comments-->
   <form action='addComment.php' method='post'>
 	Comment: <br/>
     <textarea name='comment' style='height:200px;width:300px'></textarea><br>
