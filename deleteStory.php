@@ -24,6 +24,6 @@
   $stmt->bind_param('s', $file_name);
   $stmt->execute();
   $stmt->close();
-  header("refesh:1; url=viewStories.php");
+  header("refresh:1; url=viewStories.php");
   exit;
 ?>
